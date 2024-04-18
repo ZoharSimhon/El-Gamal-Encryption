@@ -18,7 +18,10 @@ The implementation in the provided Jupyter notebook includes the following steps
 
 1. A safe prime `p` is generated. This  number is used as the basis for the encryption and decryption process.
 
-2. The public key and private key are generated using the `key_generation` function. The public key consists of a pair of numbers, while the private key is a single number.
+1. A generator of the group $\mathbb{Z}_{p}^{*}$  `g` is generated in the `key_generation` function. Using the `is_generator` function we check the condition: </br> $\forall q|p-1 : g^{\frac{p-1}{q}} \neq 1 \mod{p}$  
+For further explanation refer to the method.
+
+1. The public key and private key are generated using the `key_generation` function. The public key consists of a pair of numbers, while the private key is a single number.
 
 ### Encryption
 
@@ -35,9 +38,9 @@ The implementation in the provided Jupyter notebook includes the following steps
 The notebook demonstrates the encryption and decryption process for a series of messages. For each message:
 
 1. A random message is generated.
-2. The message is encrypted using the public key.
-3. The encrypted message is decrypted using the private key.
-4. The original and decrypted messages are printed for comparison.
+1. The message is encrypted using the public key.
+1. The encrypted message is decrypted using the private key.
+1. The original and decrypted messages are printed for comparison.
 
 ## Conclusion
 
@@ -49,14 +52,14 @@ The hash function plays a crucial role in the ElGamal encryption scheme, providi
 
 ### Implementation
 
-The hash function used in this implementation is based on a cryptographic hash function that operates in the group Zp*. It calculates the hash of a message (a, b) using the formula H(a, b) = g^a * h^b mod p, where:
+The hash function used in this implementation is based on a cryptographic hash function that operates in the group $\mathbb{Z}_{p}^{*}$. It calculates the hash of a message (a, b) using the formula $H(a,b) = g^{a} \cdot h^{b} \mod{p}$, where:
 
 - `p` is a large prime number.
-- `g` is a generator of the group Zp*.
-- `h` is a fixed element in the group Zp*.
+- `g` is a generator of the group $\mathbb{Z}_{p}^{*}$.
+- `h` is a fixed element in the group $\mathbb{Z}_{p}^{*}$.
 - `a` and `b` are the components of the message.
 
-The function `is_generator(g, p)` checks if `g` is a generator of the group Zp*, ensuring that the chosen generator can generate all elements of the group. The function `find_generator(p)` searches for a suitable generator `g` in the range [2, p-1].
+The function `is_generator(g, p)` checks if `g` is a generator of the group $\mathbb{Z}_{p}^{*}$, ensuring that the chosen generator can generate all elements of the group. The function `find_generator(p)` searches for a suitable generator `g` in the range [2, p-1].
 
 The `hash(a, b, details)` function calculates the hash of a message (a, b) using the provided details (p, g, h). It uses the modular exponentiation operation to efficiently compute the hash.
 
